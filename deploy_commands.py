@@ -21,7 +21,7 @@ def splitall(path): # taken from: https://www.oreilly.com/library/view/python-co
             allparts.insert(0, parts[1])
     return allparts
 
-def joinall(splitted_path):
+def joinall(splitted_path): # i actually made this
     result = ""
 
     for part in splitted_path:

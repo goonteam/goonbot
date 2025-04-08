@@ -26,7 +26,7 @@
 		"\tdata: new SlashCommandBuilder()",
 		"\t\t.setName(\"${1:commandName}\")",
 		"\t\t.setDescription(\"${2:commandDescription}\"),",
-		"\tasync execute(interaction) {",
+		"\tasync execute(interaction: ChatInputCommandInteraction) {",
 		"\t\t${3:insertCode}",
 		"\t},",
 		"};"
