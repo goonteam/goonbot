@@ -1,0 +1,26 @@
+{
+  "name": "goonbot",
+  "version": "1.0.0",
+  "description": "a simple discord bot, nothing more, nothing less.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js",
+    "deploy-commands": "python deploy_commands.py & node ./src/deploy-commands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goonteam/goonbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goonteam/goonbot/issues"
+  },
+  "homepage": "https://github.com/goonteam/goonbot#readme",
+  "dependencies": {
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7"
+  }
+}
