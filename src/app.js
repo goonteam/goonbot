@@ -51,6 +51,4 @@ for (const file of eventFiles) {
 	}
 }
 
-
-
 bot.login(process.env.BOT_TOKEN);

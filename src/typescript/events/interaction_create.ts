@@ -1,6 +1,7 @@
 import { ChatInputCommandInteraction, MessageFlags, Events } from "discord.js"
 
-
+// this came from the old file with slight modifications
+// sorry for using any a lot, there was just too much errors....
 module.exports = {
     name: Events.InteractionCreate,
     once: false,
