@@ -9,7 +9,7 @@ const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const bot = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMembers
+		GatewayIntentBits.GuildMembers,
     ]
 });
 
