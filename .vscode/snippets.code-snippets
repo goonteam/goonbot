@@ -19,15 +19,14 @@
 	"Discord Slash Command": {
 	"prefix": "slashcommand",
 	"body": [
-		"import { CacheType, ChatInputCommandInteraction } from \"discord.js\";",
-		"const { SlashCommandBuilder } = require(\"discord.js\");",
+		"import { ChatInputCommandInteraction, SlashCommandBuilder } from \"discord.js\";",
 		"",
 		"module.exports = {",
 		"\tdata: new SlashCommandBuilder()",
 		"\t\t.setName(\"${1:commandName}\")",
 		"\t\t.setDescription(\"${2:commandDescription}\"),",
 		"\tasync execute(interaction: ChatInputCommandInteraction) {",
-		"\t\t${3:insertCode}",
+		"\t\t${3:// insertCode}",
 		"\t},",
 		"};"
 	],

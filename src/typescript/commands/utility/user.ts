@@ -17,6 +17,12 @@ module.exports = {
             user = interaction.user;
         }
 
-        await interaction.reply(`The user is named ${user.globalName} (or ${user.username}).`); // test
+        let userGlobalName: string | null = user.globalName; // because for bots its weird
+
+        if (!userGlobalName) {
+            userGlobalName = user.username;
+        }
+
+        await interaction.reply(`The user is named ${userGlobalName} (or ${user.username}).`); 
     },
 };

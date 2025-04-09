@@ -3,7 +3,7 @@ require("dotenv").config(); // dotenv whatever
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { Client, Events, GatewayIntentBits, SlashCommandBuilder, Collection } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 
 
 const bot = new Client({
@@ -17,7 +17,7 @@ bot.commands = new Collection();
 
 // all this code was from some tutorial
 
-const foldersPath = path.join(__dirname, 'commands-js');
+const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -35,35 +35,22 @@ for (const folder of commandFolders) {
 	}
 }
 
-bot.once(Events.ClientReady, c => { // on ready for the bot
-    console.log(`logged in as ${c.user.tag}!`);
+// registering all the events
 
-});
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith(".js"));
 
-bot.on(Events.InteractionCreate, async interaction => {
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
 
-    if (!interaction.isChatInputCommand()) {
-        return;
-    }
-
-    // COPIED BTW!!!!
-    const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
+	if (event.once) {
+		bot.once(event.name, (...args) => event.execute(...args));
+	} else {
+		bot.on(event.name, (...args) => event.execute(...args));
 	}
+}
 
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
-		}
-	}
-});
+
 
 bot.login(process.env.BOT_TOKEN);
