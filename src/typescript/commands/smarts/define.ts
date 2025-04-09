@@ -1,5 +1,15 @@
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
+function checkIfVowel(toCheck: string): boolean {
+    let vowels = ["a", "e", "i", "o", "u"];
+
+    if (vowels.includes(toCheck.charAt(0))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("define")
@@ -62,11 +72,18 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setTitle(`Definitions for "${word}"`)
                     .setColor("Random");
-
+                
                 for (let i = 0; i < topDefinitions.length; i++) {
+                let futureName: string | null = null;
+
+                    if (checkIfVowel(topDefinitions[i][1])) {
+                        futureName = `As an ${topDefinitions[i][1]}:`;
+                    } else {
+                        futureName = `As a ${topDefinitions[i][1]}:`;
+                    }
 
                     embed.addFields({
-                        name: `Part of Speech: ${topDefinitions[i][1]}`,
+                        name: futureName,
                         value: topDefinitions[i][0],
                         inline: true
                     }); // this will add a field for each definition
@@ -79,7 +96,7 @@ module.exports = {
             })
             .catch(error => {
                 console.error("ERROR: ", error);
-                interaction.reply("There was an error, should've known English anyway.");
+                interaction.reply("There was an error, that word most likely isn't in the dictionary.");
             })
     },
 };
