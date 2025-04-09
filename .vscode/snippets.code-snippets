@@ -31,5 +31,20 @@
 		"};"
 	],
 	"description": "Discord Slash Command"
+	},
+	"Discord Event": {
+	"prefix": "discordevent",
+	"body": [
+		"import { Client } from \"discord.js\";",
+		"",
+		"module.exports = {",
+		"\tname: \"ready\",",
+		"\tonce: true,",
+		"\tasync execute(bot: Client | any) {",
+		"\t\tconsole.log(`logged in as ${bot.user.tag}!`);",
+		"\t}",
+		"}"
+	],
+	"description": "Discord Event"
 	}
 }

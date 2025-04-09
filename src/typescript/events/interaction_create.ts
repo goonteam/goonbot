@@ -5,6 +5,7 @@ import { ChatInputCommandInteraction, MessageFlags, Events } from "discord.js"
 module.exports = {
     name: Events.InteractionCreate,
     once: false,
+    
     async execute(interaction: ChatInputCommandInteraction | any) {
         if (!interaction.isChatInputCommand()) {
             return;
