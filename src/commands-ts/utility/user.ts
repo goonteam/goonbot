@@ -1,6 +1,4 @@
-import { ChatInputCommandInteraction } from "discord.js";
-
-const { SlashCommandBuilder } = require("discord.js");
+import { ChatInputCommandInteraction, SlashCommandBuilder, User } from "discord.js";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,12 +11,12 @@ module.exports = {
                 .setRequired(false)
             ),
     async execute(interaction: ChatInputCommandInteraction) {
-        let user = interaction.options.getUser("user");
+        let user: User | null = interaction.options.getUser("user");
 
         if (!user) {
             user = interaction.user;
         }
 
-        await interaction.reply(`The user is named ${user.globalName} (or ${user.username}).`)
+        await interaction.reply(`The user is named ${user.globalName} (or ${user.username}).`); // test
     },
 };
