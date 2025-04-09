@@ -35,13 +35,13 @@
 	"Discord Event": {
 	"prefix": "discordevent",
 	"body": [
-		"import { Client } from \"discord.js\";",
+		"import { Client, Events } from \"discord.js\";",
 		"",
 		"module.exports = {",
-		"\tname: \"ready\",",
-		"\tonce: true,",
+		"\tname: Events.${1:eventName},",
+		"\tonce: ${2:false},",
 		"\tasync execute(bot: Client | any) {",
-		"\t\tconsole.log(`logged in as ${bot.user.tag}!`);",
+		"\t\t// code",
 		"\t}",
 		"}"
 	],
