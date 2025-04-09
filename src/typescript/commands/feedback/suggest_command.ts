@@ -14,7 +14,7 @@ module.exports = {
             .setTitle("Click the link below")
             .setColor("Random")
             .setDescription(`[Suggestions Form](${responseLink})`)
-            .setThumbnail();
+            .setThumbnail("https://github.com/goonteam/goonbot/blob/main/img/goonlogobot.png?raw=true");
 
         interaction.editReply({
             embeds: [embed],
