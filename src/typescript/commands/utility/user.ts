@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, User } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, GuildMember, SlashCommandBuilder, User } from "discord.js";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,6 +23,36 @@ module.exports = {
             userGlobalName = user.username;
         }
 
-        await interaction.reply(`The user is named ${userGlobalName} (or ${user.username}).`); 
+
+        const embed = new EmbedBuilder()
+            .setTitle(`Stats of ${user.username}`)
+            .setColor("Random")
+            .setThumbnail(user.displayAvatarURL())
+            .addFields(
+            {
+                name: "Username",
+                value: user.username,
+                inline: true
+            },
+            {
+                name: "Display Name",
+                value: user.displayName,
+                inline: true
+            },
+            {
+                name: "ID",
+                value: user.id,
+                inline: true
+            },
+            {
+                name: "Discord Join Date",
+                value: user.createdAt.toDateString(),
+                inline: true
+            }
+        )
+
+        await interaction.reply({
+            embeds: [embed]
+        }); 
     },
 };

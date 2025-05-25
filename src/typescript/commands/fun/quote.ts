@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -6,19 +6,31 @@ module.exports = {
         .setDescription("Give an inspirational quote, for when you feel down."),
     async execute(interaction: ChatInputCommandInteraction) {
         type Quote = {
-            id: number,
-            quote: string,
-            author: string
+            q: string,
+            a: string,
+            h?: string
         };
 
-        const quoteApi: string = "https://qapi.vercel.app/api/random";
-        let messageContents: string = "";
+        const quoteApi: string = "https://zenquotes.io/api/random";
+
+        
+
         await fetch(quoteApi)
             .then(response => response.json())
             .then(data => {
-                const quoteData: Quote = data;
-                messageContents = `"${quoteData.quote}" - ${quoteData.author}`;
-                interaction.reply(messageContents)
+                const quoteData: Quote = data[0];
+
+                const embed = new EmbedBuilder()
+                            .setTitle(`${interaction.user.displayName}'s quote:`)
+                            .setColor("Random")
+                            .addFields({
+                                name: `“${quoteData.q}”`,
+                                value: `\\- ${quoteData.a}`
+                            })
+                            .setFooter({text: "Quotes from https://zenquotes.io"});
+                interaction.reply({
+                    embeds: [embed]
+                });
             })
             .catch(error => {
                 console.error("ERROR: ", error);

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/app.js",
-    "deploy-commands": "tsc & node ./src/deploy-commands.js",
-    "watch": "tsc -w"
+    "deploy-commands": "npx tsc & node ./src/deploy-commands.js",
+    "watch": "npx tsc -w"
   },
   "repository": {
     "type": "git",
